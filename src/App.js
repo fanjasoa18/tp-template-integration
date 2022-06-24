@@ -5,20 +5,19 @@ import { Breadcrumb } from "./components/Breadcrumb";
 import { EmployeeList } from "./components/List";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card";
-import { faker } from "@faker-js/faker";
 import { useState } from "react";
+import {ModalStyle} from "./components/Modal";
+import {ModalBtn} from "./components/Button";
+
 
 function App() {
-  const employees = new Array(15).fill(null).map((_) => ({
-    name: faker.name.findName(),
-    position: faker.company.bsNoun(),
-    office: faker.address.cityName(),
-    age: faker.random.numeric(2),
-    startDate: new Date().toISOString().split("T")[0],
-    salary: faker.random.numeric(6),
-  }));
-
+  
   const [sidebarClass, setSidebarClass] = useState("sb-nav-fixed");
+  const [item,setItem]=useState(null)
+  function BindFromChildren(i){
+      setItem(i);
+      console.log(i);
+  }
 
   function toggleSidebarClass() {
     setSidebarClass(
@@ -28,7 +27,12 @@ function App() {
     );
   }
 
-  return (
+  const [style, setStyle] = useState(false);
+  function handleClick(){
+    setStyle(!style)
+  }
+  return (<>
+    {style ? <ModalStyle style="Show" setStyle={handleClick} nom={item}/>:""}
     <div className={sidebarClass}>
       <Navbar toggleSidebarClass={toggleSidebarClass} />
       <div id="layoutSidenav">
@@ -48,9 +52,15 @@ function App() {
                   official DataTables documentation
                 </a>
                 .
+                
+                
+
+              </Card>
+              <Card>
+              <ModalBtn setStyle={handleClick} label="Ajouter"/>
               </Card>
               <Card title="DataTable Example">
-                <EmployeeList items={employees} />
+               
               </Card>
             </div>
           </main>
@@ -58,7 +68,12 @@ function App() {
         </div>
       </div>
     </div>
+    </>
   );
+
+  
+
 }
 
 export default App;
+
