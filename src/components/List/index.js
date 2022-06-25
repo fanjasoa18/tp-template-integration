@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-//import { Rows } from "./Rows";
+
 
 export function EmployeeList() {   
 
@@ -57,14 +57,14 @@ export function EmployeeList() {
                     <tbody>
                     {
                         result.map((elt,k)=>(
-                          <Rows key={k} id={elt.id} name={elt.name}
+                          <tr key={k} id={elt.id} name={elt.name}
                           username={elt.username}
                           email={elt.email}
                           phone={elt.phone}
                           address={elt.address.street}
                           website={elt.website}
                           company={elt.company.name}
-                         ></Rows>
+                         ></tr>
                       ))
                     }
                     </tbody>

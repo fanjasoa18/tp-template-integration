@@ -26,28 +26,29 @@ export function ModalStyle({style, setStyle,nom}) {
                     suite: "Apt. 556",
                     city: "Gwenborouh",
                     zipcode: "92998-3874"?
-                //geo: {
-                    "lat": "-37.3159",
-                    "lng": "81.1496"
-                   // }
+                    "geo": {
+                        "lat": "-37.3159",
+                        "lng": "81.1496"
+                      }
                 }
         })
         promise.then((response) => {console.log(response.data);})
         .catch((err) => {console.log()})
     }
 
-    return (<>
-        <Form setStyle={setStyle} nom2={nom}/>
-        <div className={style} onClick= {setStyle}>
+    return (
+        <>
+            <Form setStyle={setStyle} nom2={nom}/>
+            <div className={style} onClick= {setStyle}>
             
-        </div>
+            </div>
         </>
     )
 }
 function Form({setStyle,nom2}) {
     return(
         <div className="form">
-           <div>
+           <div> 
             <button onClick={setStyle} className="close" title="Close Modal" >X</button><br/>
               <Input  type = "text" placeholder="nom" className="input" label="Name"/>
               <Input  type = "text" placeholder={nom2.name} className="input" label="Username"/>

@@ -3,6 +3,7 @@ import { Navbar } from "./components/Navbar";
 import { Sidebar } from "./components/Sidebar";
 import { Breadcrumb } from "./components/Breadcrumb";
 import { EmployeeList } from "./components/List";
+import { faker } from "@faker-js/faker";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card";
 import { useState } from "react";
@@ -12,6 +13,16 @@ import {ModalBtn} from "./components/Button";
 
 function App() {
   
+  const employees = new Array(15).fill(null).map((_) => ({
+    name: faker.name.findName(),
+    position: faker.company.bsNoun(),
+    office: faker.address.cityName(),
+    age: faker.random.numeric(2),
+    startDate: new Date().toISOString().split("T")[0],
+    salary: faker.random.numeric(6),
+  }));
+
+
   const [sidebarClass, setSidebarClass] = useState("sb-nav-fixed");
   const [item,setItem]=useState(null)
   function BindFromChildren(i){
@@ -57,10 +68,10 @@ function App() {
 
               </Card>
               <Card>
-              <ModalBtn setStyle={handleClick} label="Ajouter"/>
+                <ModalBtn setStyle={handleClick} label="Ajouter"/>
               </Card>
               <Card title="DataTable Example">
-               
+                <EmployeeList items={employees} dataList={BindFromChildren}/>
               </Card>
             </div>
           </main>
